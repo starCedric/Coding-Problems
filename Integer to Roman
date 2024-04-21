@@ -1,0 +1,29 @@
+//  Integer to Roman
+
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+
+int main(){
+    
+    static vector<int>v1 = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+    static vector<string>v2 = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+    
+    int num; cin>>num;
+    string ans = "";
+    
+    for(int i=0;i<13;i++){
+        
+        int times = num/v1[i];
+        while(times--){
+            ans += v2[i];
+        }
+        //for(int j=0;j<times;j++) ans += v2[i];
+        num = num % v1[i];
+        
+    }
+    
+    cout<<ans;
+    return 0;
+}
