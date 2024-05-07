@@ -1,0 +1,26 @@
+// Find whether a number is good or bad.
+// Good Number - If a number is divisible by sum of its digits
+// Bad Number -  If a number is not divisible by sum of its digits
+
+#include<iostream>
+using namespace std;
+
+bool isGood(int n){
+    int dup = n, sum = 0;
+    while(dup>0){
+        sum += dup%10;
+        dup = dup/10;
+    }
+    if (n%sum == 0) return true;
+    else return false;
+}
+
+int main(){
+    
+    int n; cin>>n;
+    bool ans = isGood(n);
+    if(ans) cout<<"Good Number";
+    else cout<<"Bad Number";
+    
+    return 0;
+}
