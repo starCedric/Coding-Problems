@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void findUncommon(string &s1, string &s2){
+    
+    set<char>st;
+    unordered_map<char,bool>m1;
+    unordered_map<char,bool>m2;
+    
+    for(int i=0;i<s1.size();i++){
+        m1[s1[i]] = true;
+    }
+    for(int i=0;i<s2.size();i++){
+        m2[s2[i]] = true;
+        if(m1[s2[i]] != true) st.insert(s2[i]);
+    }
+    for(int i=0;i<s1.size();i++){
+        if(m2[s1[i]] != true) st.insert(s1[i]);
+    }
+    
+    for(auto it:st){
+        cout<<it;
+    }
+}
+
+int main(){
+    
+    string s1,s2; cin>>s1>>s2;
+    findUncommon(s1,s2);
+    
+    return 0;
+}
