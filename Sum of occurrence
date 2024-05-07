@@ -1,0 +1,27 @@
+//Find the sum of occurrence of a character of string s2 in string s1.
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int countOccurrence(string &s1, string &s2){
+    int sum = 0;
+    unordered_map<char, int>mp;
+    for(int i=0;i<s1.size();i++){
+        mp[s1[i]]++;
+    }
+    for(int i=0;i<s2.size();i++){
+        sum += mp[s2[i]];
+    }
+    return sum;
+}
+
+int main(){
+    
+    string s1,s2;
+    cin>>s1>>s2;
+    //getline(s1,cin);
+    int ans = countOccurrence(s1,s2);
+    cout<<ans;
+    
+    return 0;
+}
