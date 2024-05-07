@@ -1,0 +1,33 @@
+// Find the largest and the smallest digit from a given number.
+
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+int largest(int n){
+    int digit = 0;
+    while(n > 0){
+        digit = max(digit, n%10);
+        n /= 10;
+    }
+    return digit;
+}
+
+int smallest(int n){
+    int digit = 9;
+    while(n > 0){
+        digit = min(digit, n%10);
+        n /= 10;
+    }
+    return digit;
+}
+
+int main(){
+  
+    int n; cin>>n;
+    
+    cout<<"Largest digit : "<<largest(n)<<endl;
+    cout<<"Smallest digit : "<<smallest(n)<<endl;
+    
+    return 0;
+}
