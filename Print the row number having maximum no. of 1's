@@ -1,0 +1,34 @@
+// Print the row number of a 2-D matrix (0 based indexing) which has maximum number of 1's. 
+// In case multiple number of such rows present having same number of 1's,
+// print the 1st row having maximum 1's in it.
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    
+    int n,m; cin>>n>>m;
+    int arr[n][m];
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            cin>>arr[i][j];
+        }
+    }
+    
+    int maxCount = -1;
+    int rowNumber = -1;
+    for(int i=0;i<n;i++){
+        int count = 0;
+        for(int j=0;j<m;j++){
+            if(arr[i][j] == 1) count++;
+        }
+        if(count > maxCount && count != 0){
+            maxCount = max(count, maxCount);
+            rowNumber = i;
+        }
+    }
+    
+    cout<<rowNumber;
+    
+    return 0;
+}
