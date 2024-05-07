@@ -1,0 +1,33 @@
+// Check if the given number is "Relative by Blood"
+// A number is said to be "Relative by Blood" if the sum factorials of the digits of the number is equal to the actual number.
+
+#include<iostream>
+using namespace std;
+
+int findFact(int n){
+    int fact = 1;
+    for(int i=n;i>0;i--){
+        fact *= i;
+    }
+    return fact;
+}
+
+void sumOfFact(int n){
+    int dup = n;
+    int sum = 0;
+    while(dup > 0){
+        int digit = dup % 10;
+        sum += findFact(digit);
+        dup /= 10;
+    }
+    if(sum == n) cout<<1;
+    else cout<<0;
+}
+
+int main(){
+    
+    int n; cin>>n;
+    sumOfFact(n);
+    
+    return 0;
+}
