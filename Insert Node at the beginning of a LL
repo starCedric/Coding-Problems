@@ -1,0 +1,54 @@
+#include<iostream>
+using namespace std;
+
+class Node{
+    public:
+    int value;
+    Node* next;
+    
+    Node(int data){
+        value = data;
+        next = NULL;
+    }
+};
+
+void printLL(Node* head){
+    Node* curr = head;
+    /*
+    for(;curr != NULL; curr = curr -> next){
+        cout<<curr -> value<<"-->";
+    }
+    cout<<"null"<<endl;
+    */
+    ///*
+    while(curr != NULL){
+        cout<<curr -> value<<"-->";
+        curr = curr->next;
+    }
+    cout<<"null"<<endl;
+    //*/
+}
+
+Node* insertLL(Node* head, int data){
+        Node* temp = new Node(data);
+        temp->next = head;
+        head = temp;
+        return head;
+}
+
+int main(){
+    
+    Node* head = NULL;
+    head = insertLL(head, 20);
+    head = insertLL(head, 30);
+    head = insertLL(head, 40);
+    head = insertLL(head, 50);
+    
+    cout<<"Before inserting : "<<endl;
+    printLL(head);
+    cout<<"After inserting : "<<endl;
+    head = insertLL(head, 0);
+    printLL(head);
+    
+    return 0;
+}
