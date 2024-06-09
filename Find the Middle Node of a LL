@@ -1,0 +1,126 @@
+#include<iostream>
+using namespace std;
+
+// Node creation
+class Node{
+  public:
+  int value;
+  Node* next;
+  Node(int data){ //constructor
+      value = data;
+      next = nullptr;
+  }
+};
+
+/*
+Brute force approach - 
+1.create a temp pointer variable and point it to head.
+2.create a integer count variable to find the length of the LL (IN CASE THE LENGTH IS NOT GIVEN).
+3.Traverse through the LL using the temp variable and a while loop.
+4.Find the middle node by simply dividing the length by 2 and adding 1 to it.
+5.Again point the temp variable to the head of LL. 
+6.Run another while loop till the temp reaches the midNode.
+6.Return the value at temp. 
+7. Time complexity - O(N+N/2) ~ O(N). [2 PASSES ARE REQUIRED]
+*/
+
+int findMiddle(Node* head){
+    
+    Node* temp = head;
+    int count = 0;
+    while(temp != NULL){
+        count++;
+        temp = temp -> next;
+    }
+    
+    int midNode = (count/2)+1;
+    temp = head;
+    
+    while(temp != NULL){
+        midNode = midNode - 1;
+        if(midNode == 0) break;
+        temp = temp -> next;
+    }
+    return temp->value;
+}
+
+
+/*
+Better/optimal approach (Tortoise-Hare algorithm)
+1.create 2 variables named slow and fast and point them to the head of the LL.
+2.Run a while loop to traverse through the LL.
+3.Set the slow pointer to it's next and fast pointer to it's next to next.
+4.Return the value at slow.
+5.Time complexity - O(N/2) ~ O(N). [SINGLE PASS IS REQUIRED]
+*/
+
+int findMiddle1(Node* head){
+    Node* slow = head;
+    Node* fast = head;
+    
+    while(fast != NULL && fast -> next != NULL){
+        slow = slow -> next;
+        fast = fast -> next -> next;
+    }
+    return slow ->value;
+}
+
+
+// Addition of nodes to the LL by createLL() function
+Node* createLL(Node* head, int data){
+    
+    Node* newNode = new Node(data);
+    
+    if(head == nullptr){
+        return nullptr;
+    }
+    Node* temp = head;
+    while(temp -> next != nullptr){
+        temp = temp -> next;
+    }
+    temp -> next = newNode;
+    newNode -> next = nullptr;
+    
+    return head;
+}
+
+// Printing the LL
+void printLL(Node* head){
+    Node* temp = head;
+    while(temp != NULL){
+        cout<<temp -> value<<"-->";
+        temp = temp -> next;
+    }
+    cout<<"NULL"<<endl;
+}
+
+int main(){
+    
+    cout<<"Enter the value at head of the LL : "<<endl;
+    int n; cin>>n;
+    Node* head = new Node(n);
+    
+    cout<<"Enter the length of the LL : "<<endl;
+    int length; cin>>length;
+    
+    cout<<"Enter the value at each node after head of the LL : "<<endl;
+    while(length-- > 1){
+        int node_val; cin>>node_val;
+        head = createLL(head, node_val);
+    }
+    
+    /*
+    Node* head = new Node(10);
+    head = createLL(head, 20);
+    head = createLL(head, 30);
+    head = createLL(head, 40);
+    head = createLL(head, 50);
+    head = createLL(head, 60);
+    */
+    
+    cout<<endl<<"The linked list is : ";
+    printLL(head);
+    cout<<endl<<"Middle node of the linked list is : "<<findMiddle1(head);
+    
+    return 0;
+}
