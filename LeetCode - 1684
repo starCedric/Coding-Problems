@@ -1,0 +1,36 @@
+// problem: https://leetcode.com/problems/count-the-number-of-consistent-strings
+
+// solution :
+
+class Solution {
+public:
+
+    bool checkPresence(string &s, unordered_map<char, int> &mp){
+
+        int count = 0;
+        for(char ch : s){
+            if(mp[ch] > 0)
+                count++;
+        }
+        if(count == s.size())
+            return true;
+
+        return false;
+    }
+
+    int countConsistentStrings(string allowed, vector<string>& words) {
+        unordered_map<char, int> mp;
+        int count = 0;
+
+        for(char it : allowed){
+            mp[it]++;
+        }
+
+        for(auto it : words){
+            if(checkPresence(it, mp))
+                count++;
+        }
+
+        return count;
+    }
+};
