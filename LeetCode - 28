@@ -1,0 +1,23 @@
+// problem : https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/
+
+// solution :
+
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        
+        for(int i = 0; i < haystack.size(); i++){
+            if(haystack[i] == needle[0]){
+                int p = i;
+                for(int j = 0; j < needle.size(); j++){
+                    if(haystack[p] != needle[j])
+                    break;
+                    else p++;
+                }
+                if(p - i == needle.size())
+                return i; 
+            }
+        }
+        return -1;
+    }
+};
