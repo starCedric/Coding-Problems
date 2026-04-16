@@ -1,0 +1,26 @@
+Problem link: https://leetcode.com/problems/house-robber/description/
+
+Solution:
+
+class Solution {
+public:
+
+    int decide(int idx, vector<int> &nums, vector<int> &dp){
+
+        if(idx == 0) return nums[idx];
+        if(idx < 0) return 0;
+        if(dp[idx] != -1) return dp[idx];
+
+        int pick = nums[idx] + decide((idx - 2), nums, dp);
+        int not_pick = 0 + decide((idx - 1), nums, dp);
+
+        dp[idx] = max(pick, not_pick);
+        return dp[idx];
+    }
+
+    int rob(vector<int>& nums) {
+        int idx = nums.size();
+        vector<int> dp(idx, -1);
+        return decide(idx - 1, nums, dp);  
+    }
+};
